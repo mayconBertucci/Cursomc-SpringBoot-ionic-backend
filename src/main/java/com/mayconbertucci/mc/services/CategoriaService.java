@@ -1,4 +1,4 @@
-package com.mayconbertucci.mc.service;
+package com.mayconbertucci.mc.services;
 
 import java.util.Optional;
 
