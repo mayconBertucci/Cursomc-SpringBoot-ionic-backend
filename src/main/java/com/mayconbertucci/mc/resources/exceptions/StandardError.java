@@ -1,4 +1,4 @@
-package com.mayconbertucci.mc.resources.exception;
+package com.mayconbertucci.mc.resources.exceptions;
 
 import java.io.Serializable;
 

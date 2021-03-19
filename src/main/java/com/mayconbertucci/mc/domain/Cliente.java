@@ -33,8 +33,11 @@ public class Cliente {
 	
 	@ElementCollection
 	@CollectionTable(name = "TELEFONE")
-	private Set<String> telefone = new HashSet<>();
+	private Set<String> telefones = new HashSet<>();
 
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
+	
 	public Cliente() {}
 
 	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
@@ -95,11 +98,11 @@ public class Cliente {
 	}
 
 	public Set<String> getTelefone() {
-		return telefone;
+		return telefones;
 	}
 
 	public void setTelefone(Set<String> telefone) {
-		this.telefone = telefone;
+		this.telefones = telefone;
 	}
 
 	@Override
@@ -108,6 +111,26 @@ public class Cliente {
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
+	}
+	
+	public Set<String> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(Set<String> telefones) {
+		this.telefones = telefones;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
 	}
 
 	@Override
