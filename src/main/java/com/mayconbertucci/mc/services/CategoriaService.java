@@ -3,10 +3,12 @@ package com.mayconbertucci.mc.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.mayconbertucci.mc.domain.Categoria;
 import com.mayconbertucci.mc.repositories.CategoriaRepository;
+import com.mayconbertucci.mc.service.exceptions.DataIntegrityException;
 import com.mayconbertucci.mc.service.exceptions.ObjectNotFoundException;
 
 @Service
@@ -29,5 +31,14 @@ public class CategoriaService {
 	public Categoria update(Categoria obj) {
 		find(obj.getId());
 		return repo.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		find(id);
+		try {
+			repo.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos");
+		}
 	}
 }
